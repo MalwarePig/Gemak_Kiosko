@@ -1,0 +1,25 @@
+
+================================= CONFIGURAR GIT =========================================
+git config --global user.email "xxxx"
+git config --global user.name "xxxx"
+
+================================= COMANDOS GIT UP ========================================
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/MalwarePig/Gemak_Kiosko.git
+git push -u origin main
+
+================================= COMANDOS GIT HERRAMIENTAS ==============================
+git checkout -- index.html (Regresa a la version anterior el archivo modificado)
+git diff index.html (Muestra las cambios entre versiones)
+
+================================= COMANDOS GIT DOWN ======================================
+Git clone link (Descargar el repositorio)
+git pull https://github.com/MalwarePig/TicketsSupport >>(Obtiene actualizaciones en línea y las fusiona con tu trabajo local); 
+
+
+ 
+
+

@@ -1,0 +1,39 @@
+ion-toolbar {
+    --background: #13111c;
+    --color: #ffffff;
+}
+
+ion-content {
+    --background: #1d1b29;
+    --color: #ffffff;
+
+}
+
+ion-item,
+ion-card,ion-list,ion-footer {
+    --background: #232033;
+    --color: #ffffff;
+}
+
+
+ion-card {
+    text-align: center;
+}
+
+ion-img {
+    width: 150px;
+    height: 100px;
+    align-self: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 50px;
+}
+
+.Prestamos{
+    background: #305e5e;
+}
+
+.Vacaciones{
+    background: #446449;
+}
