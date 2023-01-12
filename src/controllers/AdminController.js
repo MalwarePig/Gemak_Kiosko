@@ -15,6 +15,7 @@ Controller.Login = (req, res) => {
         console.log("Debe buscar:" + Argumento)
         conn.query("SELECT * FROM empleados WHERE Nomina = '" + Nomina + "'", (err, data) => {
             req.session.planta = data[0].Planta;
+            req.session.nombre = data[0].Nombre;
             if (err) {
                 //res.json("Error json: " + err);
                 console.log('Error al buscar empleados ' + err);

@@ -16,13 +16,13 @@
     <!-----------------------------------------------     FECHAS MOMENTS     ---------------------------------------------------------------->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <!-----------------------------------------------     JS     ---------------------------------------------------------------->
-    <script type="text/javascript" src="js/Usuarios/HistorialPrestamos.js"></script>
+    <script type="text/javascript" src="js/Usuario/HistorialPrestamos.js"></script>
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#eb445a" />
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css"> 
 
 </head>
 
-<body onload="MostrarProyectos()">
+<body onload="MostrarHistorial()">
     <ion-app>
         <!-- Cabezera -->
         <ion-header>
@@ -41,11 +41,11 @@
         </ion-header>
 
         <!-- Contenido -->
-        <ion-content >  
+        <ion-content>
             <!-- Lista Tareas -->
             <div>
                 <ion-grid>
-                    <ion-row >
+                    <ion-row>
                         <ion-col size-md="4" offset-md="4">
                             <ion-list id="ListaMaestra">
 
@@ -56,14 +56,33 @@
             </div>
         </ion-content>
 
+        <!-- Loader 9 -->
+<!-- 
+        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+            y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+            <rect x="20" y="50" width="4" height="10" fill="#fff">
+                <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0"
+                    begin="0" dur="0.6s" repeatCount="indefinite" />
+            </rect>
+            <rect x="30" y="50" width="4" height="10" fill="#fff">
+                <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0"
+                    begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+            </rect>
+            <rect x="40" y="50" width="4" height="10" fill="#fff">
+                <animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0"
+                    begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+            </rect>
+        </svg> -->
+
         <!-- Footer  -->
-        <ion-footer class="ion-no-border" >
+        <ion-footer class="ion-no-border">
             <ion-grid>
                 <ion-row>
-                    <ion-col size-md="4" offset-md="4" >
+                    <ion-col size-md="4" offset-md="4">
                         <ion-toolbar>
                             <!--  <ion-button expand="block" color="dark" href="/FormNuevaTarea">Nueva Tarea</ion-button> -->
-                            <ion-button expand="block" color="tertiary" id="FormNuevaTarea" onclick="Nuevatareas()">Solicitar
+                            <ion-button expand="block" color="tertiary" id="FormNuevaTarea"
+                                onclick="Nuevatareas()">Solicitar
                             </ion-button>
                         </ion-toolbar>
                     </ion-col>
@@ -77,7 +96,7 @@
         <!-- Modal Editar Tarea -->
         <ion-modal trigger="FormNuevaTarea" id="ModalFormNuevaTarea">
             <ion-header>
-                <ion-toolbar >
+                <ion-toolbar>
                     <ion-title id="TituloTareaModal">SOLICITUD PRESTAMO </ion-title>
                     <ion-buttons slot="primary">
                         <ion-button onClick="CerrarFormularioNewTarea()">
@@ -94,8 +113,8 @@
                         <ion-input type="text" id="Mod_idTarea"></ion-input>
                     </ion-item>
 
-                    <ion-item >
-                        <ion-label >Registro: </ion-label>
+                    <ion-item>
+                        <ion-label>Registro: </ion-label>
                         <ion-input readonly type="text" id="FechaRegistro"> </ion-input>
                     </ion-item>
 
@@ -111,7 +130,7 @@
 
                     <ion-item>
                         <ion-label>Plazo: </ion-label>
-                        <ion-select id="Semanas">
+                        <ion-select id="Plazo">
                             <ion-select-option value="1">1 Semana</ion-select-option>
                             <ion-select-option value="2">2 Semanas</ion-select-option>
                             <ion-select-option value="3">3 Semanas</ion-select-option>
@@ -123,9 +142,9 @@
                             <ion-select-option value="9">9 Semanas</ion-select-option>
                             <ion-select-option value="10">10 Semanas</ion-select-option>
                             <ion-select-option value="11">11 Semanas</ion-select-option>
-                            <ion-select-option value="12">12 Semanas</ion-select-option> 
+                            <ion-select-option value="12">12 Semanas</ion-select-option>
                         </ion-select>
-                    </ion-item>  
+                    </ion-item>
                     <ion-grid>
                         <ion-row>
                             <ion-col>
@@ -136,115 +155,105 @@
                             </ion-col>
                         </ion-row>
                     </ion-grid>
-                    
-                  
+
+
 
                 </ion-card-content>
             </ion-content>
         </ion-modal>
 
-        
-    <!-- ************************************************************************************************************************** -->
 
-    <!-- Modal Estatus Tarea -->
-    <ion-modal trigger="eModalEstatusSistemas" id="ModalEstatusSistemas">
-        <ion-header>
-            <ion-toolbar color="dark">
-                <ion-title id="TituloTareaModal">Estatus</ion-title>
-                <ion-buttons slot="primary">
-                    <ion-button onClick="CerrarModalEstatusSistemas()">
-                        <ion-icon slot="icon-only" name="close"></ion-icon>
-                    </ion-button>
-                </ion-buttons>
-            </ion-toolbar>
-        </ion-header>
-        <ion-content>
+        <!-- ************************************************************************************************************************** -->
 
-            <ion-card>
+        <!-- Modal Estatus Tarea -->
+        <ion-modal trigger="eModalEstatusSistemas" id="ModalEstatusSistemas">
+            <ion-header>
+                <ion-toolbar>
+                    <ion-title id="TituloTareaModal">Resumen</ion-title>
+                    <ion-buttons slot="primary">
+                        <ion-button onClick="CerrarModalEstatusSistemas()">
+                            <ion-icon slot="icon-only" name="close"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
 
- 
-                <ion-row class="ion-justify-content-center">
-                    <ion-col size="5">
-                        <img src="../images/gear.svg"> 
-                        
-                    </ion-col>
-                </ion-row>
+                <ion-card>
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="5">
+                            <img src="../images/gear.svg">
+                        </ion-col>
+                    </ion-row>
 
-                
-                <ion-item class="ion-activated">
-                    <ion-icon name="ellipse-sharp" slot="start"></ion-icon>
-                    <ion-label id="est_Nombre">Nombre Apellido</ion-label>
-                </ion-item>
+                    <ion-item class="ion-activated">
+                        <ion-icon name="ellipse-sharp" slot="start"></ion-icon>
+                        <ion-label id="est_Nombre">Nombre Apellido</ion-label>
+                    </ion-item>
 
-                <ion-item>
-                    <ion-icon name="caret-forward-sharp" slot="start"></ion-icon>
-                    <ion-label id="est_Maquina">Maquina ##</ion-label>
-                </ion-item>
+                    <ion-item>
+                        <ion-icon name="caret-forward-sharp" slot="start"></ion-icon>
+                        <ion-label id="est_Maquina">Maquina ##</ion-label>
+                    </ion-item>
 
-                <ion-item class="ion-activated">
-                    <ion-icon name="caret-forward-sharp" slot="start"></ion-icon>
-                    <ion-label id="est_FechaResgistro">Fecha registro: DD/MM/YYYY</ion-label>
-                </ion-item>
+                    <ion-item class="ion-activated">
+                        <ion-icon name="caret-forward-sharp" slot="start"></ion-icon>
+                        <ion-label id="est_FechaResgistro">Fecha registro: DD/MM/YYYY</ion-label>
+                    </ion-item>
 
-                <ion-item>
-                    <ion-icon name="caret-forward-sharp" slot="start"></ion-icon>
-                    <ion-label>Estado: <span id="est_Estatus"></span></ion-label>
-                </ion-item>
-            </ion-card>
+                    <ion-item>
+                        <ion-icon name="caret-forward-sharp" slot="start"></ion-icon>
+                        <ion-label>Estado: <span id="est_Estatus"></span></ion-label>
+                    </ion-item>
+                </ion-card>
 
-              
-            <ion-card>
-                <ion-card-header>
-                    <ion-label>Respuesta</ion-label>
-                </ion-card-header>
-                <ion-item>
-                    <ion-textarea placeholder="Respuesta: " readonly id="est_Respuesta"></ion-textarea>
-                </ion-item>
 
-                <ion-item class="ion-activated">
-                    <ion-icon name="caret-forward-sharp" slot="start"></ion-icon>
-                    <ion-label id="est_FechaPromesa">Fecha promesa: DD/MM/YYYY</ion-label>
-                </ion-item>
-            </ion-card>
+                <ion-card>
+                    <ion-card-header>
+                        <ion-label>Respuesta</ion-label>
+                    </ion-card-header>
+                    <ion-item>
+                        <ion-textarea placeholder="Respuesta: " readonly id="est_Respuesta"></ion-textarea>
+                    </ion-item>
 
-            <ion-button expand="block" color="dark" onClick="CerrarModalEstatusSistemas()">Cerrar</ion-button>
-        </ion-content>
-    </ion-modal>
+                    <ion-item class="ion-activated">
+                        <ion-icon name="caret-forward-sharp" slot="start"></ion-icon>
+                        <ion-label id="est_FechaPromesa">Fecha promesa: DD/MM/YYYY</ion-label>
+                    </ion-item>
+                </ion-card>
+
+                <ion-button expand="block" color="dark" onClick="CerrarModalEstatusSistemas()">Cerrar</ion-button>
+            </ion-content>
+        </ion-modal>
     </ion-app>
 
- <!-- Bloque oculto Borrador -->
- <div id="Item-Borrador" style="display: none;">
-    <ion-item id="indiceProyecto">
-        <ion-col>
-            <ion-card color="dark">
-                <ion-card-header>
-                    <ion-card-title id="Titulo-Borrador">Nombre Proyecto</ion-card-title>
+    <!-- Bloque oculto Borrador -->
+    <div id="Item-Borrador" style="display: none;">
+        <ion-item id="indiceProyecto">
+            <ion-col>
+                <ion-card >
+                    <ion-card-header>
+                        <ion-card-title id="Titulo-FechaSolicitud">Fecha Solicitud</ion-card-title>
 
-                    <!--  <ion-card-title>Card Title</ion-card-title> -->
-                    <ion-card-subtitle id="SubTitulo-Borrador">Subtitulo</ion-card-subtitle>
-                </ion-card-header>
+                        <!--  <ion-card-title>Card Title</ion-card-title> -->
+                        <ion-card-subtitle id="SubTitulo-Borrador">Subtitulo</ion-card-subtitle>
+                    </ion-card-header>
 
+                    <ion-item>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-label id="Estatus-Borrador" position="stacked"></ion-label>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-progress-bar type="indeterminate" id="BarraCumplimiento"></ion-progress-bar>
+                    </ion-item>
+                </ion-card>
+            </ion-col>
 
-
-                <ion-card-content id="Contenido-Borrador">
-                    Keep close to Nature's heart... and break clear away, once in awhile,
-                    and climb a mountain or spend a week in the woods. Wash your spirit clean.
-                </ion-card-content>
-                <ion-item>
-                    <ion-grid>
-                        <ion-row> 
-                            <ion-col>
-                                <ion-label id="FechasProyecto" position="stacked"></ion-label>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                    <ion-progress-bar id="BarraCumplimiento"></ion-progress-bar>
-                </ion-item>
-            </ion-card>
-        </ion-col>
-
-    </ion-item>
-</div>
+        </ion-item>
+    </div>
 
 
 </body>

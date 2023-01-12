@@ -1,6 +1,6 @@
 const express = require('express'); //guardar express en una variable de servidor
 const router = express.Router(); //usar modulo de router de ex´press
-const ElectricoController = require('../controllers/ElectricoController');
+const EmpleadoController = require('../controllers/EmpleadoController');
 const MantenimientoController = require('../controllers/MantenimientoController');
 const SistemasController = require('../controllers/SistemasController');
 const AdminController = require('../controllers/AdminController');
@@ -22,17 +22,17 @@ router.get('/Login/:Argumento', AdminController.Login);
 
 
 
-/*********************************************** ELECTRICO ***********************************************/
+/*********************************************** Prestamos ***********************************************/
 router.get('/HistorialPrestamos', (req, res) => {
 	//res.send('holoo');
 	res.render('./Usuarios/HistorialPrestamos.html'); 
 });
 
 //Registra Nueva tarea
-router.post('/solicitarPrestamo', ElectricoController.solicitarPrestamo);
+router.post('/solicitarPrestamo', EmpleadoController.solicitarPrestamo);
 //Cargar TareasAbiertas
-router.get('/TareasAbiertasElectrico/:Argumento', ElectricoController.TareasAbiertasElectrico);
-router.get('/CargarTareaElectricoid/:Argumento', ElectricoController.CargarTareaElectricoid);
+router.get('/ListaHistorialPrestamos/:Argumento', EmpleadoController.ListaHistorialPrestamos);
+router.get('/CargarTareaElectricoid/:Argumento', EmpleadoController.CargarTareaElectricoid);
 
 /********************************************* MANTENIMIENTO *********************************************/
 router.get('/ListaMantenimiento', (req, res) => {
@@ -84,11 +84,11 @@ router.get('/ListaServicioElectrico', (req, res) => {
 });
 
 //Cargar TareasAbiertas vistas por el servidor
-router.get('/TareasAbiertasServidorElectrico/:Argumento', ElectricoController.TareasAbiertasServidorElectrico);
+router.get('/TareasAbiertasServidorElectrico/:Argumento', EmpleadoController.TareasAbiertasServidorElectrico);
 //Actualiza la respuesta
-router.post('/ActualizarTareasElectrico', ElectricoController.ActualizarTareasElectrico);
+router.post('/ActualizarTareasElectrico', EmpleadoController.ActualizarTareasElectrico);
 //Cerrartarea
-router.post('/CerrarTareasElectrico', ElectricoController.CerrarTareasElectrico);
+router.post('/CerrarTareasElectrico', EmpleadoController.CerrarTareasElectrico);
 
 /*********************************************** Mantenimiento ***********************************************/
 router.get('/ListaServicioMantenimiento', (req, res) => {

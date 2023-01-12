@@ -6,15 +6,15 @@ Controller.solicitarPrestamo = (req, res) => {
     req.getConnection((err, conn) => {
         const data = req.body; //TRAE TODO EL OBJETO
 
-        let Nombre = Object.values(data)[0].Nombre;
-        let Planta = Object.values(data)[0].Planta;
-        let Nomina = Nomina.values(data)[0].Nomina;
-        let Cantidad = Object.values(data)[0].Cantidad;
-        let Semanas = Object.values(data)[0].Semanas; 
+        console.log(req.session.nombre)
 
-        console.log("Nomina: " + Nomina)
-        conn.query("INSERT INTO TareaElectrico(Usuario,Planta,Equipo,Nota,Rama,Nomina,Impacto)VALUES" +
-            "('" + Nombre + "','" + Planta + "','" + Falla + "','" + Notas + "','" + Rama + "','" + Nomina + "','"+Impacto+"')", (err, Herramientas) => {
+        let Empleado = req.session.nombre;
+        let Planta = Object.values(data)[0].Planta;
+        let Nomina = Object.values(data)[0].Nomina;
+        let Cantidad = Object.values(data)[0].Cantidad;
+        let Plazo = Object.values(data)[0].Plazo;  
+        conn.query("INSERT INTO Prestamos(Nomina,Empleado,Planta,Cantidad,Plazo)VALUES" +
+            "('" + Nomina + "','" + Empleado + "','" + Planta + "'," + Cantidad + "," + Plazo + ")", (err, data) => {
                 if (err) {
                     console.log('Error de lectura' + err);
                     res.json(false);
@@ -27,13 +27,13 @@ Controller.solicitarPrestamo = (req, res) => {
 };
 
 
-Controller.TareasAbiertasElectrico = (req, res) => {
+Controller.ListaHistorialPrestamos = (req, res) => {
     //res.send('Metodo Get list');
     req.getConnection((err, conn) => {
         const {
             Argumento
         } = req.params;
-        conn.query("SELECT * FROM TareaElectrico WHERE Nomina = '" + Argumento + "' order by Estatus", (err, data) => {
+        conn.query("SELECT * FROM Prestamos WHERE Nomina = '" + Argumento + "' order by FechaRegistro", (err, data) => {
             if (err) {
                 //res.json("Error json: " + err);
                 console.log('Error al registrar recepcion ' + err);
